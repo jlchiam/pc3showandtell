@@ -14,9 +14,10 @@ basically means to run the Docker Hub image Uli created for Hello World on port 
 Steps:
 # 1. Get Source
 
-git clone https://github.com/u1i/docker-hello
+> git clone https://github.com/u1i/docker-hello
 
 # 2. Make Changes
+From Google Cloud Shell Editor, open up docker-hello/app/index.html and make some changes.
 
 # 3: Build Container
 change into the directory: cd docker-hello
@@ -30,4 +31,8 @@ Docker will call the API to Docker Hub to get the image to build.
 
 # 4: Run Containter
 docker run -d -p 8080:8080 myhello
+
+# 5: View the changes
+From Google Cloud Shell, somewhere at the upper right hand side, click the "web preview" icon to see the changes.
+
 
