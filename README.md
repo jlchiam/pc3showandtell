@@ -49,10 +49,65 @@ gcloud artifacts repositories create quickstart-docker-repo --repository-format=
     --location=us-central1 --description="Docker repository"
 `
 9. Verify that the repository is created `gcloud artifacts repositories list` (*add image here*)
-10. Build the image using Dockerfile and then submit the image to the *Artifact Registry*
+10. Build the image. There are two ways.
+    a. Using Dockerfile
+    b. Using Build Config File
+
+    a. using Dockerfile and then submit the image to the *Artifact Registry*
    - To do this, get the Cloud project ID `gcloud config get-value project` (*add image*)
    - At the same dir where `quickstart.sh` and `dockerfile` is located, run this command substituting the project-id with your project-id in the previous step
-`
-gcloud builds submit --tag us-central1-docker.pkg.dev/project-id/quickstart-docker-repo/quickstart-image:tag1
-`
-So mine is like this: (*image*)
+   
+      `
+      gcloud builds submit --tag us-central1-docker.pkg.dev/project-id/quickstart-docker-repo/quickstart-image:tag1
+      `
+
+      So mine is like this: (*image*)
+      
+      I chose to use Dockerfile, so at the end of the built and push to Artifact Registry, I get this (*image*)
+
+   b. using a build config file.
+      - In Google Cloud Shell Editor, at the same directory as `quickstart.sh` and `Dockerfile`, create a *build config file* named `cloudbuild.yaml`
+      - At build time, Cloud Build automatically replaces `$PROJECT_ID` with your project ID, so you don't need to worry about replacing it yourself.
+      `
+      steps:
+      - name: 'gcr.io/cloud-builders/docker'
+        args: [ 'build', '-t', 'us-central1-docker.pkg.dev/$PROJECT_ID/quickstart-docker-repo/quickstart-image:tag1', '.' ]
+      images:
+      - 'us-central1-docker.pkg.dev/$PROJECT_ID/quickstart-docker-repo/quickstart-image:tag1'
+      `
+
+      At the terminal, start the build `gcloud builds submit --config cloudbuild.yaml`
+      
+11. Checking is done via Google Cloud Console -> Cloud Build Page.
+ 
+12. Google Cloud requires Cloud Run Admin and IAM Service Account User permissions before it can deploy an image to Cloud Run. (G Cloud Run automates the managing of server resources, so DevOps team can focus on developing the app).
+
+   - At terminal, set environment variables to store the project ID and project number
+   `
+   PROJECT_ID=$(gcloud config list --format='value(core.project)')
+   PROJECT_NUMBER=$(gcloud projects describe $PROJECT_ID --format='value(projectNumber)')
+   `
+
+   - Grant Cloud Run Admin role to Cloud Build service account (command line)
+   `
+   gcloud projects add-iam-policy-binding $PROJECT_ID \
+    --member=serviceAccount:$PROJECT_NUMBER@cloudbuild.gserviceaccount.com \
+    --role=roles/run.admin
+   `
+   
+   - I think this is the end result that you see in Google Cloud Console
+   (*image*)
+   
+   - Grant IAM Service Account User role to the Cloud Build service account for the Cloud Run runtime service account:
+   `
+   gcloud iam service-accounts add-iam-policy-binding \
+    $PROJECT_NUMBER-compute@developer.gserviceaccount.com \
+    --member=serviceAccount:$PROJECT_NUMBER@cloudbuild.gserviceaccount.com \
+    --role=roles/iam.serviceAccountUser
+   `
+13. Deploy a prebuilt image
+
+
+
+
+ 
