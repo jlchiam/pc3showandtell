@@ -61,8 +61,8 @@ This project will have the following parts:
     b. Using Build Config File
 
     a. using Dockerfile and then submit the image to the *Artifact Registry*
-         - To do this, get the Cloud project ID `gcloud config get-value project` (*add image*)
-         - At the same dir where `quickstart.sh` and `dockerfile` is located, run this command substituting the project-id with your project-id in the previous step
+    - To do this, get the Cloud project ID `gcloud config get-value project` (*add image*)
+    - At the same dir where `quickstart.sh` and `dockerfile` is located, run this command substituting the project-id with your project-id in the previous step
    
       ```
       gcloud builds submit --tag us-central1-docker.pkg.dev/project-id/quickstart-docker-repo/quickstart-image:tag1
@@ -74,9 +74,9 @@ This project will have the following parts:
 
    b. using a build config file.
       
-         - In Google Cloud Shell Editor, at the same directory as `quickstart.sh` and `Dockerfile`, create a *build config file* named `cloudbuild.yaml`
-         - At build time, Cloud Build automatically replaces `$PROJECT_ID` with your project ID, so you don't need to worry about replacing it yourself.
-      
+    - In Google Cloud Shell Editor, at the same directory as `quickstart.sh` and `Dockerfile`, create a *build config file* named `cloudbuild.yaml`
+    - At build time, Cloud Build automatically replaces `$PROJECT_ID` with your project ID, so you don't need to worry about replacing it yourself.
+
          ```
          steps:
          - name: 'gcr.io/cloud-builders/docker'
@@ -85,7 +85,7 @@ This project will have the following parts:
          - 'us-central1-docker.pkg.dev/$PROJECT_ID/quickstart-docker-repo/quickstart-image:tag1'
          ```
 
-         - At the terminal, start the build `gcloud builds submit --config cloudbuild.yaml`
+     - At the terminal, start the build `gcloud builds submit --config cloudbuild.yaml`
       
 11. Checking is done via Google Cloud Console -> Cloud Build Page.
  
