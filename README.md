@@ -73,18 +73,18 @@ This project will have the following parts:
     - I chose to use Dockerfile, so at the end of the built and push to Artifact Registry, I get this (*image*)
 
    b. using a build config file.
-    - In Google Cloud Shell Editor, at the same directory as `quickstart.sh` and `Dockerfile`, create a *build config file* named `cloudbuild.yaml`
-    - At build time, Cloud Build automatically replaces `$PROJECT_ID` with your project ID, so you don't need to worry about replacing it yourself.
+   - In Google Cloud Shell Editor, at the same directory as `quickstart.sh` and `Dockerfile`, create a *build config file* named `cloudbuild.yaml`
+   - At build time, Cloud Build automatically replaces `$PROJECT_ID` with your project ID, so you don't need to worry about replacing it yourself.
 
-         ```
-         steps:
-         - name: 'gcr.io/cloud-builders/docker'
-           args: [ 'build', '-t', 'us-central1-docker.pkg.dev/$PROJECT_ID/quickstart-docker-repo/quickstart-image:tag1', '.' ]
-         images:
-         - 'us-central1-docker.pkg.dev/$PROJECT_ID/quickstart-docker-repo/quickstart-image:tag1'
-         ```
+      ```
+      steps:
+      - name: 'gcr.io/cloud-builders/docker'
+        args: [ 'build', '-t', 'us-central1-docker.pkg.dev/$PROJECT_ID/quickstart-docker-repo/quickstart-image:tag1', '.' ]
+      images:
+      - 'us-central1-docker.pkg.dev/$PROJECT_ID/quickstart-docker-repo/quickstart-image:tag1'
+      ```
 
-     - At the terminal, start the build `gcloud builds submit --config cloudbuild.yaml`
+    - At the terminal, start the build `gcloud builds submit --config cloudbuild.yaml`
       
 11. Checking is done via Google Cloud Console -> Cloud Build Page.
  
