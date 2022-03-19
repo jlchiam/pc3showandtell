@@ -82,7 +82,7 @@ gcloud artifacts repositories create quickstart-docker-repo --repository-format=
       - 'us-central1-docker.pkg.dev/$PROJECT_ID/quickstart-docker-repo/quickstart-image:tag1'
       `
 
-      At the terminal, start the build `gcloud builds submit --config cloudbuild.yaml`
+      - At the terminal, start the build `gcloud builds submit --config cloudbuild.yaml`
       
 11. Checking is done via Google Cloud Console -> Cloud Build Page.
  
