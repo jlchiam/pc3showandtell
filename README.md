@@ -17,7 +17,7 @@ This project will have the following parts:
 
 # Google Quickstart-cloudsamples
 
-- Followed [Google's quickstart guide] (https://cloud.google.com/build/docs/build-push-docker-image?msclkid=fa9b75a1a68011ec866f86293bccb184)
+- Followed [Google's quickstart guide](https://cloud.google.com/build/docs/build-push-docker-image?msclkid=fa9b75a1a68011ec866f86293bccb184)
 - Create project and enable API
 - Build a Docker image
 - Deploy the image
@@ -26,7 +26,10 @@ This project will have the following parts:
 <hr />
 
 1. Created a Google Cloud Project called "pc3devopsproject2)
-2. Enabled Cloud Build and Artifact Registry APIs (*add image here later, ![The San Juan Mountains are beautiful!](/assets/images/san-juan-mountains.jpg "San Juan Mountains"*))
+2. Enabled Cloud Build and Artifact Registry APIs
+   
+   <img width="488" alt="010 APIs" src="https://user-images.githubusercontent.com/11884697/159124946-c94dd1d2-7bd1-468f-9476-a54ad4258d81.PNG">
+
 3. install and initialize Google Cloud CLI. If already installed, run this to get latest version `gcloud components update`
    - to install, just use a docker image `docker pull gcr.io/google.com/cloudsdktool/google-cloud-cli:latest`
    - to check if you have installed, `docker run --rm gcr.io/google.com/cloudsdktool/google-cloud-cli:latest gcloud version`
@@ -61,22 +64,36 @@ This project will have the following parts:
    gcloud artifacts repositories create quickstart-docker-repo --repository-format=docker \ --location=us-central1 --description="Docker repository"
    ```
 
-9. Verify that the repository is created `gcloud artifacts repositories list` (*add image here*)
-10. Build the image. There are two ways.
+9. Verify that the repository is created `gcloud artifacts repositories list`
+   
+   <img width="359" alt="020 repo created" src="https://user-images.githubusercontent.com/11884697/159124974-8095eb95-491f-409c-ac67-52a5ed59f9c3.PNG">
+
+
+11. Build the image. There are two ways.
     a. Using Dockerfile
     b. Using Build Config File
 
     a. using Dockerfile and then submit the image to the *Artifact Registry*
-    - To do this, get the Cloud project ID `gcloud config get-value project` (*add image*)
+    - To do this, get the Cloud project ID `gcloud config get-value project`
+
+      <img width="355" alt="020 get proj id" src="https://user-images.githubusercontent.com/11884697/159125030-bab76a9c-ad13-4c9c-879c-97a4eea03863.PNG">
+
+
     - At the same dir where `quickstart.sh` and `dockerfile` is located, run this command substituting the project-id with your project-id in the previous step
    
       ```
       gcloud builds submit --tag us-central1-docker.pkg.dev/project-id/quickstart-docker-repo/quickstart-image:tag1
       ```
 
-    - So mine is like this: (*image*)
+    - So mine is like this:
       
-    - I chose to use Dockerfile, so at the end of the built and push to Artifact Registry, I get this (*image*)
+      <img width="357" alt="040 build image" src="https://user-images.githubusercontent.com/11884697/159125021-fc077298-4aca-4293-bbfb-5c286224c716.PNG">
+
+      
+    - I chose to use Dockerfile, so at the end of the built and push to Artifact Registry, I get this
+    
+      <img width="359" alt="050 push image success" src="https://user-images.githubusercontent.com/11884697/159125001-d45e66d1-27dc-4ad6-b2e2-eebb8b40548b.PNG">
+
 
    b. using a build config file.
    - In Google Cloud Shell Editor, at the same directory as `quickstart.sh` and `Dockerfile`, create a *build config file* named `cloudbuild.yaml`
@@ -112,7 +129,9 @@ This project will have the following parts:
       ```
    
    - I think this is the end result that you see in Google Cloud Console
-   (*image*)
+      
+      <img width="228" alt="072 run url" src="https://user-images.githubusercontent.com/11884697/159125065-6967e64b-17c4-48ed-9160-631080d64b76.PNG">
+
    
    - Grant IAM Service Account User role to the Cloud Build service account for the Cloud Run runtime service account:
    
