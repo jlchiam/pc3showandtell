@@ -84,7 +84,7 @@ This project will have the following parts:
       - 'us-central1-docker.pkg.dev/$PROJECT_ID/quickstart-docker-repo/quickstart-image:tag1'
       ```
 
-    - At the terminal, start the build `gcloud builds submit --config cloudbuild.yaml`
+   - At the terminal, start the build `gcloud builds submit --config cloudbuild.yaml`
       
 11. Checking is done via Google Cloud Console -> Cloud Build Page.
  
@@ -119,8 +119,6 @@ This project will have the following parts:
    
 13. Deploy a prebuilt image
 
-
-and markdown is painful
 
 
  
