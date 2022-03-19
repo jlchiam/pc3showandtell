@@ -37,18 +37,22 @@ This project will have the following parts:
 echo "Hello, world! The time is $(date)."
 `
 6. Create a file named `Dockerfile` with no file extension, with the following:
+
 `
 FROM alpine
 COPY quickstart.sh /
 CMD ["/quickstart.sh"]
 `
+
 7. In the terminal, run the following command to make quickstart.sh executable `chmod +x quickstart.sh`\
 
 8. Create a Docker repository in Artifact Registry called `quickstart-docker-repo` with location `us-central1` with the description 'Docker repository'
+
 `
 gcloud artifacts repositories create quickstart-docker-repo --repository-format=docker \
     --location=us-central1 --description="Docker repository"
 `
+
 9. Verify that the repository is created `gcloud artifacts repositories list` (*add image here*)
 10. Build the image. There are two ways.
     a. Using Dockerfile
@@ -69,6 +73,7 @@ gcloud artifacts repositories create quickstart-docker-repo --repository-format=
    b. using a build config file.
       - In Google Cloud Shell Editor, at the same directory as `quickstart.sh` and `Dockerfile`, create a *build config file* named `cloudbuild.yaml`
       - At build time, Cloud Build automatically replaces `$PROJECT_ID` with your project ID, so you don't need to worry about replacing it yourself.
+      
       `
       steps:
       - name: 'gcr.io/cloud-builders/docker'
@@ -84,12 +89,14 @@ gcloud artifacts repositories create quickstart-docker-repo --repository-format=
 12. Google Cloud requires Cloud Run Admin and IAM Service Account User permissions before it can deploy an image to Cloud Run. (G Cloud Run automates the managing of server resources, so DevOps team can focus on developing the app).
 
    - At terminal, set environment variables to store the project ID and project number
+   
    `
    PROJECT_ID=$(gcloud config list --format='value(core.project)')
    PROJECT_NUMBER=$(gcloud projects describe $PROJECT_ID --format='value(projectNumber)')
    `
 
    - Grant Cloud Run Admin role to Cloud Build service account (command line)
+   
    `
    gcloud projects add-iam-policy-binding $PROJECT_ID \
     --member=serviceAccount:$PROJECT_NUMBER@cloudbuild.gserviceaccount.com \
@@ -100,12 +107,14 @@ gcloud artifacts repositories create quickstart-docker-repo --repository-format=
    (*image*)
    
    - Grant IAM Service Account User role to the Cloud Build service account for the Cloud Run runtime service account:
+   
    `
    gcloud iam service-accounts add-iam-policy-binding \
     $PROJECT_NUMBER-compute@developer.gserviceaccount.com \
     --member=serviceAccount:$PROJECT_NUMBER@cloudbuild.gserviceaccount.com \
     --role=roles/iam.serviceAccountUser
    `
+   
 13. Deploy a prebuilt image
 
 
