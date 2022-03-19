@@ -34,25 +34,26 @@ This project will have the following parts:
    ```
 
 5. In the cloud shell editor, create a new file called `quickstart.sh` with the following:
-`
-echo "Hello, world! The time is $(date)."
-`
+
+   ```
+   echo "Hello, world! The time is $(date)."
+   ```
+   
 6. Create a file named `Dockerfile` with no file extension, with the following:
 
-   `
+   ```
    FROM alpine
    COPY quickstart.sh /
    CMD ["/quickstart.sh"]
-   `
+   ```
 
 7. In the terminal, run the following command to make quickstart.sh executable `chmod +x quickstart.sh`\
 
 8. Create a Docker repository in Artifact Registry called `quickstart-docker-repo` with location `us-central1` with the description 'Docker repository'
 
-   `
-   gcloud artifacts repositories create quickstart-docker-repo --repository-format=docker \
-       --location=us-central1 --description="Docker repository"
-   `
+   ```
+   gcloud artifacts repositories create quickstart-docker-repo --repository-format=docker \ --location=us-central1 --description="Docker repository"
+   ```
 
 9. Verify that the repository is created `gcloud artifacts repositories list` (*add image here*)
 10. Build the image. There are two ways.
@@ -60,12 +61,12 @@ echo "Hello, world! The time is $(date)."
     b. Using Build Config File
 
     a. using Dockerfile and then submit the image to the *Artifact Registry*
-   - To do this, get the Cloud project ID `gcloud config get-value project` (*add image*)
-   - At the same dir where `quickstart.sh` and `dockerfile` is located, run this command substituting the project-id with your project-id in the previous step
+         - To do this, get the Cloud project ID `gcloud config get-value project` (*add image*)
+         - At the same dir where `quickstart.sh` and `dockerfile` is located, run this command substituting the project-id with your project-id in the previous step
    
-      `
+      ```
       gcloud builds submit --tag us-central1-docker.pkg.dev/project-id/quickstart-docker-repo/quickstart-image:tag1
-      `
+      ```
 
     - So mine is like this: (*image*)
       
@@ -75,13 +76,13 @@ echo "Hello, world! The time is $(date)."
       - In Google Cloud Shell Editor, at the same directory as `quickstart.sh` and `Dockerfile`, create a *build config file* named `cloudbuild.yaml`
       - At build time, Cloud Build automatically replaces `$PROJECT_ID` with your project ID, so you don't need to worry about replacing it yourself.
       
-         `
+         ```
          steps:
          - name: 'gcr.io/cloud-builders/docker'
            args: [ 'build', '-t', 'us-central1-docker.pkg.dev/$PROJECT_ID/quickstart-docker-repo/quickstart-image:tag1', '.' ]
          images:
          - 'us-central1-docker.pkg.dev/$PROJECT_ID/quickstart-docker-repo/quickstart-image:tag1'
-         `
+         ```
 
       - At the terminal, start the build `gcloud builds submit --config cloudbuild.yaml`
       
@@ -91,30 +92,30 @@ echo "Hello, world! The time is $(date)."
 
    - At terminal, set environment variables to store the project ID and project number
    
-      `
+      ```
       PROJECT_ID=$(gcloud config list --format='value(core.project)')
       PROJECT_NUMBER=$(gcloud projects describe $PROJECT_ID --format='value(projectNumber)')
-      `
+      ```
 
    - Grant Cloud Run Admin role to Cloud Build service account (command line)
    
-      `
+      ```
       gcloud projects add-iam-policy-binding $PROJECT_ID \
        --member=serviceAccount:$PROJECT_NUMBER@cloudbuild.gserviceaccount.com \
        --role=roles/run.admin
-      `
+      ```
    
    - I think this is the end result that you see in Google Cloud Console
    (*image*)
    
    - Grant IAM Service Account User role to the Cloud Build service account for the Cloud Run runtime service account:
    
-      `
+      ```
       gcloud iam service-accounts add-iam-policy-binding \
        $PROJECT_NUMBER-compute@developer.gserviceaccount.com \
        --member=serviceAccount:$PROJECT_NUMBER@cloudbuild.gserviceaccount.com \
        --role=roles/iam.serviceAccountUser
-      `
+      ```
    
 13. Deploy a prebuilt image
 
