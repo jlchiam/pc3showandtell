@@ -28,9 +28,10 @@ This project will have the following parts:
    - after authenticate successfully, the credentials are preserved in the volume of the `gcloud-config` container
 
 4. Create sample codes to build in the container image
-
-   `mkdir quickstart-docker`<br>
-   `cd quickstart-docker`
+   ```
+   mkdir quickstart-docker
+   cd quickstart-docker
+   ```
 
 5. In the cloud shell editor, create a new file called `quickstart.sh` with the following:
 `
