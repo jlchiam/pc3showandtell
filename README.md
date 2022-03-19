@@ -29,8 +29,8 @@ This project will have the following parts:
 
 4. Create sample codes to build in the container image
 
-   `mkdir quickstart-docker<Br>
-   cd quickstart-docker`
+   `mkdir quickstart-docker`
+   `cd quickstart-docker`
 
 5. In the cloud shell editor, create a new file called `quickstart.sh` with the following:
 `
