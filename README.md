@@ -3,14 +3,14 @@
 I don't really understand what am I doing. So I tried to re-do the practical.
 
 This project will have the following parts:
-- [Docker Hello] (https://github.com/jlchiam/docker-hello.git) - Displays "Hello World!" in different heading sizes.
-- [Docker nodejs] (https://github.com/jlchiam/nodejs-api.git) - No changes at the moment, but I may update it later.
+- [Docker Hello](https://github.com/jlchiam/docker-hello.git) - Displays "Hello World!" in different heading sizes.
+- [Docker nodejs](https://github.com/jlchiam/nodejs-api.git) - No changes at the moment, but I may update it later.
 - Google Quickstart cloudsamples (details below)
 -- Creates a Docker image
 -- Deploy the image into the *Artifact Registry*
 -- Deploy a containerized image to Google Cloud Run
 
-- [Google cloud-build-samples] (https://github.com/jlchiam/cloud-build-samples.git)
+- [Google cloud-build-samples](https://github.com/jlchiam/cloud-build-samples.git)
 
 
 <hr />
