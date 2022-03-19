@@ -73,6 +73,7 @@ This project will have the following parts:
     - I chose to use Dockerfile, so at the end of the built and push to Artifact Registry, I get this (*image*)
 
    b. using a build config file.
+      
       - In Google Cloud Shell Editor, at the same directory as `quickstart.sh` and `Dockerfile`, create a *build config file* named `cloudbuild.yaml`
       - At build time, Cloud Build automatically replaces `$PROJECT_ID` with your project ID, so you don't need to worry about replacing it yourself.
       
