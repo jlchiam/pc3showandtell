@@ -8,6 +8,7 @@ This project will have the following parts:
 - `Google Quickstart-cloudsamples`
 
 <hr />
+
 # Google Quickstart-cloudsamples
 
 - Followed [Google's quickstart guide] (https://cloud.google.com/build/docs/build-push-docker-image?msclkid=fa9b75a1a68011ec866f86293bccb184)
@@ -21,14 +22,14 @@ This project will have the following parts:
 1. Created a Google Cloud Project called "pc3devopsproject2)
 2. Enabled Cloud Build and Artifact Registry APIs (*add image here later, ![The San Juan Mountains are beautiful!](/assets/images/san-juan-mountains.jpg "San Juan Mountains"*))
 3. install and initialize Google Cloud CLI. If already installed, run this to get latest version `gcloud components update`
-- to install, just use a docker image `docker pull gcr.io/google.com/cloudsdktool/google-cloud-cli:latest`
-- to check if you have installed, `docker run --rm gcr.io/google.com/cloudsdktool/google-cloud-cli:latest gcloud version`
-- then need to authenticate `docker run -ti --name gcloud-config gcr.io/google.com/cloudsdktool/google-cloud-cli gcloud auth login`, I think it is to link gcloud with docker
-- after authenticate successfully, the credentials are preserved in the volume of the `gcloud-config` container
+   - to install, just use a docker image `docker pull gcr.io/google.com/cloudsdktool/google-cloud-cli:latest`
+   - to check if you have installed, `docker run --rm gcr.io/google.com/cloudsdktool/google-cloud-cli:latest gcloud version`
+   - then need to authenticate `docker run -ti --name gcloud-config gcr.io/google.com/cloudsdktool/google-cloud-cli gcloud auth login`, I think it is to link gcloud with docker
+   - after authenticate successfully, the credentials are preserved in the volume of the `gcloud-config` container
 
 4. Create sample codes to build in the container image
-- `mkdir quickstart-docker
-- cd quickstart-docker`
+   - `mkdir quickstart-docker
+   - cd quickstart-docker`
 
 5. In the cloud shell editor, create a new file called `quickstart.sh` with the following:
 `
@@ -49,8 +50,8 @@ gcloud artifacts repositories create quickstart-docker-repo --repository-format=
 `
 9. Verify that the repository is created `gcloud artifacts repositories list` (*add image here*)
 10. Build the image using Dockerfile and then submit the image to the *Artifact Registry*
-- To do this, get the Cloud project ID `gcloud config get-value project` (*add image*)
-- At the same dir where `quickstart.sh` and `dockerfile` is located, run this command substituting the project-id with your project-id in the previous step
+   - To do this, get the Cloud project ID `gcloud config get-value project` (*add image*)
+   - At the same dir where `quickstart.sh` and `dockerfile` is located, run this command substituting the project-id with your project-id in the previous step
 `
 gcloud builds submit --tag us-central1-docker.pkg.dev/project-id/quickstart-docker-repo/quickstart-image:tag1
 `
